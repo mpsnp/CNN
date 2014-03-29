@@ -10,6 +10,7 @@ set(CNN_SOURCES
 )
 
 set(CNN_HEADERS
+	Include/CNN.hxx
 	Include/CNeuron.hxx
 	Include/CGenericNetwork.hxx
 	Include/CPerceptron.hxx
