@@ -6,10 +6,13 @@ SET(CMAKE_CXX_FLAGS "-std=c++0x")
 
 set(CNN_SOURCES 
 	Src/CNeuron.cxx
+	Src/CPerceptron.cxx
 )
 
 set(CNN_HEADERS
 	Include/CNeuron.hxx
+	Include/CGenericNetwork.hxx
+	Include/CPerceptron.hxx
 )
 
 set(CNN_INCLUDE_DIRS Include)
