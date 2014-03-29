@@ -16,7 +16,11 @@ namespace CNN
 
 		std::vector<float> Calculate(std::vector<float> Input);
 		void AddNeuronToLayer(CNeuron* Neuron, int Layer);
+		void FillLayers(std::vector<int> NeuronsQuantity);
 		
+		virtual CNeuron* GenerateNewNeuron();
+		virtual CNeuron* GenerateNewSensor();
+		virtual CNeuron* GenerateNewReciever();
 		// void AddTeacher();
 	};
 };
