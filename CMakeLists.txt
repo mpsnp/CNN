@@ -23,3 +23,5 @@ set(CNN_LIBRARIES cnn)
 include_directories(${CNN_INCLUDE_DIRS})
 
 add_library(cnn ${CNN_SOURCES} ${CNN_HEADERS})
+
+add_subdirectory(Examples)
