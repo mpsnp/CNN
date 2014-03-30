@@ -1,0 +1,15 @@
+#include "CTeacher.hxx"
+
+CNN::CTeacher::CTeacher()
+{
+	_TrainedNetwork = NULL;
+};
+
+void CNN::CTeacher::SetTrainedNetwork(CNN::CGenericNetwork *TrainedNetwork)
+{
+	_TrainedNetwork = TrainedNetwork;
+};
+
+CNN::CTeacher::~CTeacher()
+{
+};
