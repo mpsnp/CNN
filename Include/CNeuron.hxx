@@ -38,6 +38,8 @@ namespace CNN
 		void SendImpulse(float Intencity);
 
 		virtual float ActivationFunction(float x);
+		
+		float GetOutput();
 	};	
 };
 

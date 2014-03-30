@@ -1,8 +1,7 @@
 #include "CNeuron.hxx"
 #include <algorithm>
 #include <cassert>
-
-#define DEFAULT_WEIGHT 1
+#include <cstdlib>
 
 void CNN::CNeuron::AddAxonTo(CNeuron* AimNeuron)
 {
@@ -17,10 +16,15 @@ void CNN::CNeuron::AddDendrit(CNeuron* SenderNeuron)
 {
 	if (_Dendrits.find(SenderNeuron) == _Dendrits.end())
 	{
-		_Dendrits.insert(std::pair<CNeuron*, TDendrit>(SenderNeuron, TDendrit(DEFAULT_WEIGHT, 0)));
+		_Dendrits.insert(std::pair<CNeuron*, TDendrit>(SenderNeuron, TDendrit(rand() * 1.0 / RAND_MAX, 0)));
 		SenderNeuron->AddAxonTo(this);
 	};
 };
+
+float CNN::CNeuron::GetOutput()
+{
+	return ActivationFunction(GetLinearCombination());
+}
 
 int CNN::CNeuron::DendritsQuantity()
 {
