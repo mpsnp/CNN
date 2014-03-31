@@ -5,13 +5,18 @@
 
 namespace CNN
 {
+	typedef std::pair<TInputVector, TOutputVector> TLearningPair;
+	typedef std::vector<TLearningPair> TLearningData;
+	
 	class CTeacher
 	{
+	protected:
 		CGenericNetwork* _TrainedNetwork;
 	public:
 		CTeacher();
 		virtual ~CTeacher();
 		void SetTrainedNetwork(CGenericNetwork* TrainedNetwork);
+		virtual void Teach(TLearningData) = 0;
 	};
 };
 
