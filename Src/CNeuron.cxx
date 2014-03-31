@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
+#include <cmath>
 
 void CNN::CNeuron::AddAxonTo(CNeuron* AimNeuron)
 {
@@ -74,7 +75,7 @@ float CNN::CNeuron::GetLinearCombination()
 
 float CNN::CNeuron::ActivationFunction(float x)
 {
-	return x;
+	return x / (fabsf(x) + _ActivationShifter);
 };
 
 void CNN::CNeuron::SendImpulse(float Intencity)
