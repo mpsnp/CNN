@@ -17,6 +17,8 @@ namespace CNN
 	class CNeuron
 	{
 	private:
+		int _SignalsResieved = 0;
+		float _ActivationShifter = 0.5;
 		std::map<CNeuron*, TDendrit> _Dendrits;
 		std::vector<CNeuron*> _Axons;
 	public:
@@ -38,6 +40,8 @@ namespace CNN
 		void SendImpulse(float Intencity);
 
 		virtual float ActivationFunction(float x);
+		
+		float GetOutput();
 	};	
 };
 
