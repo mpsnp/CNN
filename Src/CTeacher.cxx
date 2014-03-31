@@ -1,4 +1,5 @@
 #include "CTeacher.hxx"
+#include "cstdlib"
 
 CNN::CTeacher::CTeacher()
 {
