@@ -5,12 +5,15 @@
 
 namespace CNN
 {
+	typedef std::vector<float> TInputVector;
+	typedef std::vector<float> TOutputVector;
+	
 	class CGenericNetwork
 	{
 	public:
 		CGenericNetwork(){};
 		virtual ~CGenericNetwork(){};
-		virtual std::vector<float> Calculate(std::vector<float> Input) = 0;
+		virtual TOutputVector Calculate(TInputVector Input) = 0;
 	};
 };
 

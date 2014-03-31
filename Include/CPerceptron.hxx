@@ -6,6 +6,8 @@
 
 namespace CNN
 {
+	typedef std::vector<CNeuron*> TNeuronLayer;
+	
 	class CPerceptron : public CGenericNetwork
 	{
 	private:
@@ -14,14 +16,17 @@ namespace CNN
 		CPerceptron(int HiddenLayers);
 		~CPerceptron();
 
-		std::vector<float> Calculate(std::vector<float> Input);
+		TOutputVector Calculate(TInputVector Input);
 		void AddNeuronToLayer(CNeuron* Neuron, int Layer);
 		void FillLayers(std::vector<int> NeuronsQuantity);
 		
+		TNeuronLayer GetLayer(int Layer);
+		TNeuronLayer GetRecieversLayer();
+		TNeuronLayer GetSensorsLayer();
+		
+		int GetLayerCount();
+		
 		virtual CNeuron* GenerateNewNeuron();
-		virtual CNeuron* GenerateNewSensor();
-		virtual CNeuron* GenerateNewReciever();
-		// void AddTeacher();
 	};
 };
 
