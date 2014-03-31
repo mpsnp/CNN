@@ -48,7 +48,13 @@ void CNN::CNeuron::RecieveSignal(CNeuron* Sender, float Signal)
 {
 	auto Dendrit = _Dendrits.find(Sender);
 	assert(Dendrit != _Dendrits.end());
+	_SignalsResieved++;
 	(*Dendrit).second.Signal = Signal;
+	if (_SignalsResieved == _Dendrits.size())
+	{
+		SendImpulse(ActivationFunction(GetLinearCombination()));
+		_SignalsResieved = 0;
+	};
 };
 
 float CNN::CNeuron::GetSignalState(CNeuron* Sender)
