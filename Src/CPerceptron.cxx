@@ -1,9 +1,11 @@
 #include "CPerceptron.hxx"
 #include <cassert>
+#include <random>
 
 CNN::CPerceptron::CPerceptron(int HiddenLayers)
 {
 	_vLayers.resize(HiddenLayers + 2);
+	srand(time(NULL));
 };
 
 CNN::CPerceptron::~CPerceptron()
@@ -65,7 +67,7 @@ void CNN::CPerceptron::AddNeuronToLayer(CNeuron* Neuron, int Layer)
 		for (auto upperNeuron : _vLayers[Layer - 1])
 			upperNeuron->AddAxonTo(Neuron);
 	if (Layer < _vLayers.size() - 1)
-		for (auto overNeuron : _vLayers[Layer])
+		for (auto overNeuron : _vLayers[Layer + 1])
 			Neuron->AddAxonTo(overNeuron);
 };
 

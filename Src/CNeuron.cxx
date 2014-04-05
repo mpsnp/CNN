@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <cmath>
+#include <random>
 
 CNN::TDendrit::TDendrit()
 {
@@ -107,7 +108,8 @@ float CNN::CNeuron::GetLinearCombination()
 
 float CNN::CNeuron::ActivationFunction(float x)
 {
-	return x / (fabsf(x) + _ActivationShifter);
+	return 1.0 / (1 + exp(-x));
+	//return x / (fabsf(x) + _ActivationShifter);
 };
 
 void CNN::CNeuron::SendImpulse(float Intencity)
