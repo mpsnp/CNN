@@ -8,6 +8,7 @@ set(CNN_SOURCES
 	Src/CNeuron.cxx
 	Src/CPerceptron.cxx
 	Src/CTeacher.cxx
+	Src/CBackpropagationTeacher.cxx
 )
 
 set(CNN_HEADERS
@@ -16,6 +17,7 @@ set(CNN_HEADERS
 	Include/CGenericNetwork.hxx
 	Include/CPerceptron.hxx
 	Include/CTeacher.hxx
+	Include/CBackpropagationTeacher.hxx
 )
 
 set(CNN_INCLUDE_DIRS Include)
