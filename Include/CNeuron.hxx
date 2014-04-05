@@ -26,6 +26,7 @@ namespace CNN
 		virtual ~CNeuron();
 
 		void AddAxonTo(CNeuron* AimNeuron);
+		std::vector<CNeuron*> GetAxons();
 		void AddDendrit(CNeuron* SenderNeuron);
 		int DendritsQuantity();
 

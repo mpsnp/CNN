@@ -13,6 +13,11 @@ void CNN::CNeuron::AddAxonTo(CNeuron* AimNeuron)
 	};
 };
 
+std::vector<CNN::CNeuron*> CNN::CNeuron::GetAxons()
+{
+	return _Axons;
+};
+
 void CNN::CNeuron::AddDendrit(CNeuron* SenderNeuron)
 {
 	if (_Dendrits.find(SenderNeuron) == _Dendrits.end())
