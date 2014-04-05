@@ -4,5 +4,6 @@
 #include "CGenericNetwork.hxx"
 #include "CNeuron.hxx"
 #include "CPerceptron.hxx"
+#include "CBackpropagationTeacher.hxx"
 
 #endif

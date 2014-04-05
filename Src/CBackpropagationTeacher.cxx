@@ -6,6 +6,11 @@
 CNN::CBackpropagationTeacher::CBackpropagationTeacher()
 :CTeacher(){};
 
+CNN::CBackpropagationTeacher::~CBackpropagationTeacher()
+{
+	
+};
+
 void CNN::CBackpropagationTeacher::Teach(TLearningData LearningData)
 {
 	CPerceptron* network = dynamic_cast<CPerceptron*>(_TrainedNetwork);

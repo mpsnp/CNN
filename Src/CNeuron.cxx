@@ -4,9 +4,21 @@
 #include <cstdlib>
 #include <cmath>
 
+CNN::TDendrit::TDendrit()
+{
+	Weight = 0;
+	Signal = 0;
+};
+
+CNN::TDendrit::TDendrit(float AWeight, float ASignal)
+{
+	Weight = AWeight;
+	Signal = ASignal;
+};
+
 void CNN::CNeuron::AddAxonTo(CNeuron* AimNeuron)
 {
-	if (AimNeuron != *std::find(_Axons.begin(), _Axons.end(), AimNeuron))
+	if ((_Axons.size() == 0) || (AimNeuron != *std::find(_Axons.begin(), _Axons.end(), AimNeuron)))
 	{
 		_Axons.push_back(AimNeuron);
 		AimNeuron->AddDendrit(this);
@@ -17,6 +29,21 @@ std::vector<CNN::CNeuron*> CNN::CNeuron::GetAxons()
 {
 	return _Axons;
 };
+
+CNN::CNeuron::CNeuron()
+{
+	_SignalsResieved = 0;
+	_ActivationShifter = 0.5;
+	_Dendrits.clear();
+	_Axons.clear();
+};
+
+CNN::CNeuron::~CNeuron()
+{
+	// TODO: Remove dependances.
+	_Dendrits.clear();
+	_Axons.clear();
+}
 
 void CNN::CNeuron::AddDendrit(CNeuron* SenderNeuron)
 {
