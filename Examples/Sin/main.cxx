@@ -18,6 +18,8 @@ int main(int argc, char const *argv[])
 	
 	CBackpropagationTeacher teacher;
 	teacher.SetTrainedNetwork(&percepron);
+	teacher.SetTrainingSpeed(0.05);
+	teacher.SetIterationsCount(100);
 	
 	TLearningData data;
 	TInputVector input;
