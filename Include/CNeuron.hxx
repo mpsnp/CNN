@@ -74,7 +74,6 @@ namespace CNN
 
 		/**
 		 * @brief Get all axons recievers.
-		 * @return Recievers of signals.
 		 */
 		std::vector<CNeuron*> GetAxons();
 
@@ -82,13 +81,12 @@ namespace CNN
 		 * @brief Adds dendrit.
 		 * @details It also adds axon from sender to self.
 		 * 
-		 * @param SenderNeuron Neuron which to link with.
+		 * @param SenderNeuron Neuron from which recieve signals.
 		 */
 		void AddDendrit(CNeuron* SenderNeuron);
 
 		/**
 		 * @brief Returns dendrits quantity.
-		 * @return Dendrits quantity.
 		 */
 		int DendritsQuantity();
 
@@ -96,7 +94,7 @@ namespace CNN
 		 * @brief Sets dendrit weight.
 		 * @details This method searces dendrit which conforms to Sender and sets it new weight.
 		 * 
-		 * @param Sender Sender neuron.
+		 * @param Sender neuron.
 		 * @param Weight New dendrit weight.
 		 */
 		void SetDendritWeight(CNeuron* Sender, float Weight);
@@ -105,7 +103,7 @@ namespace CNN
 		 * @brief Gets dendrit weight.
 		 * @details If link exists it returns it weight.
 		 * 
-		 * @param Sender Sender neuron.
+		 * @param Sender neuron.
 		 * @return Weight.
 		 */
 		float GetDendritWeight(CNeuron* Sender);
@@ -115,8 +113,8 @@ namespace CNN
 		 * @details If dendrit exists, neuron recieves signal on it. 
 		 * If neuron recieves DendritsQuantity() signals it sends impulse to all it's axons.
 		 * 
-		 * @param Sender Sender neuron.
-		 * @param Signal Signal value.
+		 * @param Sender neuron.
+		 * @param Signal value.
 		 */
 		void RecieveSignal(CNeuron* Sender, float Signal);
 
@@ -130,7 +128,6 @@ namespace CNN
 
 		/**
 		 * @brief Returns linear combination of weights and signals.
-		 * @return Sum of all TDendrit::Signal * TDendrit::Weight.
 		 */
 		float GetLinearCombination();
 
