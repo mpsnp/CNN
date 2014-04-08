@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <random>
+#include <iostream>
 
 CNN::TDendrit::TDendrit()
 {
@@ -39,12 +40,19 @@ CNN::CNeuron::CNeuron()
 	_Axons.clear();
 };
 
+void CNN::CNeuron::Print()
+{
+	std::cout << "Neuron " << this << std::endl;
+	for (auto dendrit : _Dendrits)
+		std::cout << "    Weight: " << dendrit.second.Weight << std::endl;
+};
+
 CNN::CNeuron::~CNeuron()
 {
 	// TODO: Remove dependances.
 	_Dendrits.clear();
 	_Axons.clear();
-}
+};
 
 void CNN::CNeuron::AddDendrit(CNeuron* SenderNeuron)
 {

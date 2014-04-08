@@ -1,6 +1,7 @@
 #include "CPerceptron.hxx"
 #include <cassert>
 #include <random>
+#include <iostream>
 
 CNN::CPerceptron::CPerceptron(int HiddenLayers)
 {
@@ -17,6 +18,19 @@ CNN::CPerceptron::~CPerceptron()
 				delete neuron;
 				neuron = NULL;
 			};
+};
+
+void CNN::CPerceptron::PrintNetwork()
+{
+	for (int i = 0; i < _vLayers.size(); i++)
+		PrintLayer(i);
+};
+
+void CNN::CPerceptron::PrintLayer(int ALayer)
+{
+	std::cout << "Layer " << ALayer << std::endl;
+	for (auto neuron : _vLayers[ALayer])
+		neuron->Print();
 };
 
 int CNN::CPerceptron::GetLayerCount()

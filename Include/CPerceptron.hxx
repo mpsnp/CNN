@@ -25,6 +25,9 @@ namespace CNN
 		TNeuronLayer GetSensorsLayer();
 		
 		int GetLayerCount();
+
+		void PrintLayer(int ALayer);
+		void PrintNetwork();
 		
 		virtual CNeuron* GenerateNewNeuron();
 	};

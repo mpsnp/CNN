@@ -38,6 +38,8 @@ namespace CNN
 
 		float GetLinearCombination();
 
+		void Print();
+
 		void SendImpulse(float Intencity);
 
 		virtual float ActivationFunction(float x);

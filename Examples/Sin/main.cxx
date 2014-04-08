@@ -13,12 +13,17 @@ int main(int argc, char const *argv[])
 {
 	CPerceptron percepron(1);
 	// percepron.AddNeuronToLayer(percepron.GenerateNewNeuron(), 0);
-	vector<int> layers = {1,5,1};
+	vector<int> layers = {2,5,1};
 	percepron.FillLayers(layers);
 	
+
+	cout << percepron.Calculate({1, M_PI / 6})[0] << endl;
+
+	percepron.PrintNetwork();
+
 	CBackpropagationTeacher teacher;
 	teacher.SetTrainedNetwork(&percepron);
-	teacher.SetTrainingSpeed(0.05);
+	teacher.SetTrainingSpeed(0.1);
 	teacher.SetIterationsCount(100);
 	
 	TLearningData data;
@@ -26,12 +31,13 @@ int main(int argc, char const *argv[])
 	TOutputVector output;
 	TLearningPair pair;
 	
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		input.clear();
 		output.clear();
 		
-		input.push_back(M_PI / 10 * (rand() % 10));
+		input.push_back(1);
+		input.push_back((M_PI / 200 * float(rand() % 100)));
 		output.push_back(sin(input[0]));
 		
 		pair.first = input;
@@ -41,10 +47,10 @@ int main(int argc, char const *argv[])
 	};
 	
 	teacher.Teach(data);
+
+	percepron.PrintNetwork();
 	
-	vector<float> out = percepron.Calculate({M_PI / 6});
-	
-	cout << sin(M_PI / 6) - out[0];
+	cout << percepron.Calculate({1, M_PI / 6})[0] << endl;
 	
 	return 0;
 }

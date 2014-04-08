@@ -2,6 +2,7 @@
 #include "CPerceptron.hxx"
 #include <cassert>
 #include <map>
+#include <iostream>
 
 CNN::CBackpropagationTeacher::CBackpropagationTeacher()
 :CTeacher(){};
@@ -29,8 +30,9 @@ void CNN::CBackpropagationTeacher::Teach(TLearningData LearningData)
 			{
 				float output = analysingLayer[i]->GetOutput();
 				float aim = learningPair.second[i];
-				float delta = output * (1 - output) * (output - aim);
-				deltas[analysingLayer[i]] = delta;
+				float delta = output * (1 - output) * (aim - output);
+				//deltas[analysingLayer[i]] = delta;
+				deltas.insert(std::pair<CNeuron*, float>(analysingLayer[i], delta));
 			};
 			
 			// Hidden layers deltas.
@@ -47,10 +49,10 @@ void CNN::CBackpropagationTeacher::Teach(TLearningData LearningData)
 					std::vector<CNeuron*> axons = neuron->GetAxons();
 					
 					for (CNeuron* axon : axons)
-						sum += axon->GetDendritWeight(neuron) * deltas[neuron];
+						sum += axon->GetDendritWeight(neuron) * deltas[axon];
 					
 					float delta = output * (1 - output) * sum;
-					deltas[analysingLayer[i]] = delta;
+					deltas.insert(std::pair<CNeuron*, float>(neuron, delta));
 				};
 			};
 			
@@ -60,7 +62,7 @@ void CNN::CBackpropagationTeacher::Teach(TLearningData LearningData)
 				analysingLayer = network->GetLayer(i);
 				for (CNeuron* sender : analysingLayer)
 					for (CNeuron* reciever : sender->GetAxons())
-						reciever->SetDendritWeight(sender, reciever->GetDendritWeight(sender) - _TrainingSpeed * deltas[reciever] * sender->GetOutput());
+						reciever->SetDendritWeight(sender, reciever->GetDendritWeight(sender) + _TrainingSpeed * deltas[reciever] * sender->GetOutput());
 			};
 		};
 	};
