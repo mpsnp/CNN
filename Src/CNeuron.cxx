@@ -66,7 +66,7 @@ void CNN::CNeuron::AddDendrit(CNeuron* SenderNeuron)
 float CNN::CNeuron::GetOutput()
 {
 	return ActivationFunction(GetLinearCombination());
-}
+};
 
 int CNN::CNeuron::DendritsQuantity()
 {
@@ -94,7 +94,7 @@ void CNN::CNeuron::RecieveSignal(CNeuron* Sender, float Signal)
 	(*Dendrit).second.Signal = Signal;
 	if (_SignalsResieved == _Dendrits.size())
 	{
-		SendImpulse(ActivationFunction(GetLinearCombination()));
+		SendImpulse(GetOutput());
 		_SignalsResieved = 0;
 	};
 };
