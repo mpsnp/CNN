@@ -10,6 +10,14 @@
  */
 namespace CNN
 {
+
+	class CNeuron;
+
+	/**
+	 * @brief Simply vector of neurons.
+	 */
+	typedef std::vector<CNeuron*> NeuronsVector;
+
 	/**
 	 * @brief Dendrit structure.
 	 * @details It is used in neuron for handling input signals and weights in summator.
@@ -75,7 +83,7 @@ namespace CNN
 		/**
 		 * @brief Get all axons recievers.
 		 */
-		std::vector<CNeuron*> GetAxons();
+		NeuronsVector GetAxons();
 
 		/**
 		 * @brief Adds dendrit.
@@ -151,7 +159,7 @@ namespace CNN
 		/**
 		 * @brief Returns output signal of neuron.
 		 */
-		float GetOutput();
+		virtual float GetOutput();
 	};	
 };
 
