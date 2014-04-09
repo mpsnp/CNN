@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 {
 	CPerceptron percepron(1);
 	// percepron.AddNeuronToLayer(percepron.GenerateNewNeuron(), 0);
-	vector<int> layers = {2,50,1};
+	vector<int> layers = {2,5,1};
 	percepron.FillLayers(layers);
 	
 
@@ -50,11 +50,12 @@ int main(int argc, char const *argv[])
 		data.push_back(pair);
 	};
 	
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 500; i++)
 	{
 		teacher.Teach(data);
 		
-		cout << percepron.Calculate({1, M_PI / 6})[0] << endl;
+		cout << percepron.Calculate({1, M_PI / 6})[0] << " ";
+		cout << percepron.Calculate({1, M_PI / 2})[0] << endl;
 	};
 	
 	return 0;
