@@ -5,7 +5,12 @@
 #include <iostream>
 
 CNN::CBackpropagationTeacher::CBackpropagationTeacher()
-:CTeacher(){};
+:CTeacher()
+{
+	_TrainingSpeed = DEFAULT_TRAINING_SPEED;
+	_TrainingInnertion = DEFAULT_TRAINING_INNERTION;
+	_IterationsCount = DEFAULT_ITERATIONS_COUNT;
+};
 
 CNN::CBackpropagationTeacher::~CBackpropagationTeacher()
 {
@@ -18,7 +23,7 @@ void CNN::CBackpropagationTeacher::Teach(TLearningData LearningData)
 	assert(network);
 	std::map <CNeuron*, float> deltas;
 	
-	for (int i = 0; i < _IterationsCount; i++)
+	for (int iteration = 0; iteration < _IterationsCount; iteration++)
 	{
 		for (TLearningPair learningPair : LearningData)
 		{
@@ -61,7 +66,7 @@ void CNN::CBackpropagationTeacher::Teach(TLearningData LearningData)
 				analysingLayer = network->GetLayer(i);
 				for (CNeuron* sender : analysingLayer)
 					for (CNeuron* reciever : sender->GetAxons())
-						reciever->SetDendritWeight(sender, reciever->GetDendritWeight(sender) - _TrainingSpeed * deltas[reciever] * sender->GetOutput());
+						reciever->SetDendritWeight(sender, reciever->GetDendritWeight(sender) - (_TrainingSpeed / _IterationsCount * (_IterationsCount - iteration)) * deltas[reciever] * sender->GetOutput());
 			};
 		};
 	};

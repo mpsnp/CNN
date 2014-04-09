@@ -11,13 +11,10 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	CPerceptron percepron(1);
+	CPerceptron percepron(2);
 	// percepron.AddNeuronToLayer(percepron.GenerateNewNeuron(), 0);
-	vector<int> layers = {2,50,1};
+	vector<int> layers = {1,5,3,1};
 	percepron.FillLayers(layers);
-	
-
-	cout << percepron.Calculate({1, M_PI / 6})[0] << endl;
 
 	float speed = 0;
 	int iterations = 0;
@@ -35,14 +32,13 @@ int main(int argc, char const *argv[])
 	TOutputVector output;
 	TLearningPair pair;
 	
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		input.clear();
 		output.clear();
 		
-		input.push_back(1);
-		input.push_back((M_PI / 100 * i));
-		output.push_back(sin(input[1]));
+		input.push_back((M_PI / 10 * i));
+		output.push_back(sin(input[0]));
 		
 		pair.first = input;
 		pair.second = output;
@@ -50,11 +46,11 @@ int main(int argc, char const *argv[])
 		data.push_back(pair);
 	};
 	
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		teacher.Teach(data);
 		
-		cout << percepron.Calculate({1, M_PI / 6})[0] << endl;
+		cout << percepron.Calculate({M_PI / 6})[0] << endl;
 	};
 	
 	return 0;
