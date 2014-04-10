@@ -20,13 +20,13 @@ CNN::CPerceptron::~CPerceptron()
 			};
 };
 
-void CNN::CPerceptron::PrintNetwork()
+void CNN::CPerceptron::ExportNetwork(std::ostream Output)
 {
 	for (int i = 0; i < _vLayers.size(); i++)
-		PrintLayer(i);
+		ExportLayer(i, Output);
 };
 
-void CNN::CPerceptron::PrintLayer(int ALayer)
+void CNN::CPerceptron::ExportLayer(int ALayer, std::ostream Output)
 {
 	std::cout << "Layer " << ALayer << std::endl;
 	for (auto neuron : _vLayers[ALayer])

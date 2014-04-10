@@ -132,9 +132,10 @@ namespace CNN
 		float GetLinearCombination();
 
 		/**
-		 * @brief Prints neuron to stdout.
+		 * @brief Prints neuron to Out.
+		 * @param Out Output stream.
 		 */
-		void Print();
+		void Export(std::ostream Out);
 
 		/**
 		 * @brief Sends impulse to all axons.

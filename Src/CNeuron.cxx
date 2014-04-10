@@ -40,11 +40,11 @@ CNN::CNeuron::CNeuron()
 	_Axons.clear();
 };
 
-void CNN::CNeuron::Print()
+void CNN::CNeuron::Export(std::ostream Out)
 {
-	std::cout << "Neuron " << this << std::endl;
+	Out << "Neuron " << this << std::endl;
 	for (auto dendrit : _Dendrits)
-		std::cout << "    Weight: " << dendrit.second.Weight << std::endl;
+		Out << "    Weight: " << dendrit.second.Weight << std::endl;
 };
 
 CNN::CNeuron::~CNeuron()

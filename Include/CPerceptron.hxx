@@ -85,13 +85,15 @@ namespace CNN
 		 * @todo Add new param --- output stream.
 		 * 
 		 * @param ALayer Layer index.
+		 * @param Output Output stream.
 		 */
-		void PrintLayer(int ALayer);
+		void ExportLayer(int ALayer, std::ostream Output);
 
 		/**
 		 * @brief Prints every layer in network.
+		 * @param Output Output stream.
 		 */
-		void PrintNetwork();
+		void ExportNetwork(std::ostream Output);
 		
 		/**
 		 * @brief Generates new neuron.
