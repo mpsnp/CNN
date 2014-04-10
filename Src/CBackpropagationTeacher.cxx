@@ -35,7 +35,7 @@ void CNN::CBackpropagationTeacher::Teach(TLearningData LearningData)
 			{
 				float output = analysingLayer[i]->GetOutput();
 				float aim = learningPair.second[i];
-				float delta = -output * (1 - output) * (aim - output);
+				float delta = -analysingLayer[i]->GetDifferentialOutput() * (aim - output);
 				deltas[analysingLayer[i]] = delta;
 			};
 			
@@ -55,7 +55,7 @@ void CNN::CBackpropagationTeacher::Teach(TLearningData LearningData)
 					for (CNeuron* axon : axons)
 						sum += axon->GetDendritWeight(neuron) * deltas[axon];
 					
-					float delta = output * (1 - output) * sum;
+					float delta = neuron->GetDifferentialOutput() * sum;
 					deltas[analysingLayer[i]] = delta;
 				};
 			};

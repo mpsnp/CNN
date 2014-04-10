@@ -18,9 +18,10 @@ int main(int argc, char const *argv[])
 
 	float speed = 0;
 	int iterations = 0;
+	int si = 0;
 
-	cout << "Enter speed and iterations" << endl;
-	cin >> speed >> iterations;
+	cout << "Enter speed, iterations and output times" << endl;
+	cin >> speed >> iterations >> si;
 
 	CBackpropagationTeacher teacher;
 	teacher.SetTrainedNetwork(&percepron);
@@ -46,7 +47,7 @@ int main(int argc, char const *argv[])
 		data.push_back(pair);
 	};
 	
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < si; i++)
 	{
 		teacher.Teach(data);
 		

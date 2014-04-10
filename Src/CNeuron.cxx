@@ -116,7 +116,7 @@ float CNN::CNeuron::GetLinearCombination()
 
 float CNN::CNeuron::ActivationFunction(float x)
 {
-	return 1.0 / (1 + exp(-x));
+	return 2.0 / (1 + exp(-x)) - 1;
 	//return x / (fabsf(x) + _ActivationShifter);
 };
 
@@ -124,4 +124,10 @@ void CNN::CNeuron::SendImpulse(float Intencity)
 {
 	for (auto axon : _Axons)
 		axon->RecieveSignal(this, Intencity);
+};
+
+float CNN::CNeuron::GetDifferentialOutput()
+{
+	float output = this->GetOutput();
+	return 2 * output * (1 - output);
 };

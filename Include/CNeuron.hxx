@@ -158,8 +158,15 @@ namespace CNN
 		
 		/**
 		 * @brief Returns output signal of neuron.
+		 * @warning If you override GetDifferentialOfOutput() you must override this method too.
 		 */
 		virtual float GetOutput();
+
+		/**
+		 * @brief Returns output differential.
+		 * @warning If you override GetOutput() you must override this method too.
+		 */
+		virtual float GetDifferentialOutput();
 	};	
 };
 
