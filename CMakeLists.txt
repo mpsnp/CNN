@@ -20,12 +20,19 @@ set(CNN_HEADERS
 	Include/CBackpropagationTeacher.hxx
 )
 
-set(CNN_INCLUDE_DIRS Include)
+set(CNN_INCLUDE_DIRS 
+	Include
+	Deps/levmar
+)
 
 set(CNN_LIBRARIES cnn)
 
 include_directories(${CNN_INCLUDE_DIRS})
 
+add_subdirectory(Deps/clapack)
+add_subdirectory(Deps/levmar)
+
 add_library(cnn ${CNN_SOURCES} ${CNN_HEADERS})
+target_link_libraries(cnn levmar lapack)
 
 add_subdirectory(Examples)
