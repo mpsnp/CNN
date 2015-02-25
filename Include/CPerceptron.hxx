@@ -99,6 +99,9 @@ namespace CNN
 		 * @return Pointer to base class CNeuron.
 		 */
 		virtual CNeuron* GenerateNewNeuron();
+        
+        void MapToArray(double *&map, int &length);
+        void MapFromArray(double *map, int length);
 	};
 };
 

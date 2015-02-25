@@ -9,6 +9,7 @@ set(CNN_SOURCES
 	Src/CPerceptron.cxx
 	Src/CTeacher.cxx
 	Src/CBackpropagationTeacher.cxx
+	Src/CLevMaqTeacher.cxx
 )
 
 set(CNN_HEADERS
@@ -18,6 +19,7 @@ set(CNN_HEADERS
 	Include/CPerceptron.hxx
 	Include/CTeacher.hxx
 	Include/CBackpropagationTeacher.hxx
+	Include/CLevMaqTeacher.hxx
 )
 
 set(CNN_INCLUDE_DIRS 
@@ -29,10 +31,10 @@ set(CNN_LIBRARIES cnn)
 
 include_directories(${CNN_INCLUDE_DIRS})
 
-add_subdirectory(Deps/clapack)
+#add_subdirectory(Deps/clapack)
 add_subdirectory(Deps/levmar)
 
 add_library(cnn ${CNN_SOURCES} ${CNN_HEADERS})
-target_link_libraries(cnn levmar lapack)
+target_link_libraries(cnn levmar lapack f2c blas)
 
 add_subdirectory(Examples)

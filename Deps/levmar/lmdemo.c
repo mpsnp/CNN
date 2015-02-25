@@ -53,6 +53,7 @@ register int i;
 
   for(i=0; i<n; ++i)
     x[i]=((1.0-p[0])*(1.0-p[0]) + ROSD*(p[1]-p[0]*p[0])*(p[1]-p[0]*p[0]));
+    //x[i] = p[0] * p[0] + p[1] * p[1];
 }
 
 void jacros(double *p, double *jac, int m, int n, void *data)
@@ -66,7 +67,7 @@ register int i, j;
 }
 
 
-#define MODROSLAM 0
+#define MODROSLAM 1E02
 /* Modified Rosenbrock problem, global minimum at (1, 1) */
 void modros(double *p, double *x, int m, int n, void *data)
 {
@@ -813,14 +814,14 @@ char *probname[]={
     "Hock - Schittkowski modified problem #76",
 };
 
-  opts[0]=LM_INIT_MU; opts[1]=1E-15; opts[2]=1E-15; opts[3]=1E-20;
-  opts[4]= LM_DIFF_DELTA; // relevant only if the Jacobian is approximated using finite differences; specifies forward differencing 
+  opts[0]=1E-10; opts[1]=1E-15; opts[2]=1E-15; opts[3]=1E-20;
+  opts[4]= +1E+100; // relevant only if the Jacobian is approximated using finite differences; specifies forward differencing
   //opts[4]=-LM_DIFF_DELTA; // specifies central differencing to approximate Jacobian; more accurate but more expensive to compute!
 
   /* uncomment the appropriate line below to select a minimization problem */
   problem=
-		  //0; // Rosenbrock function
-		  1; // modified Rosenbrock problem
+		  0; // Rosenbrock function
+		  //1; // modified Rosenbrock problem
 		  //2; // Powell's function
       //3; // Wood's function
 		  //4; // Meyer's (reformulated) problem
@@ -859,17 +860,17 @@ char *probname[]={
 
   case 0:
   /* Rosenbrock function */
-    m=2; n=2;
-    p[0]=-1.2; p[1]=10.0;
+    m=2; n=4;
+    p[0]=-12; p[1]=1.0;
     for(i=0; i<n; i++) x[i]=0.0;
-    ret=dlevmar_der(ros, jacros, p, x, m, n, 100000, NULL, info, NULL, NULL, NULL); // with analytic Jacobian
-    //ret=dlevmar_dif(ros, p, x, m, n, 1000000, NULL, info, NULL, NULL, NULL);  // no Jacobian
+     ret=dlevmar_der(ros, jacros, p, x, m, n, 10000, opts, info, NULL, NULL, NULL); // with analytic Jacobian
+//    ret=dlevmar_dif(ros, p, x, m, n, 10000, opts, info, NULL, NULL, NULL);  // no Jacobian
   break;
 
   case 1:
   /* modified Rosenbrock problem */
     m=2; n=3;
-    p[0]=-1.2; p[1]=10.0;
+    p[0]=-1.2; p[1]=1.0;
     for(i=0; i<n; i++) x[i]=0.0;
     ret=dlevmar_der(modros, jacmodros, p, x, m, n, 1000, opts, info, NULL, NULL, NULL); // with analytic Jacobian
     //ret=dlevmar_dif(modros, p, x, m, n, 1000, opts, info, NULL, NULL, NULL);  // no Jacobian

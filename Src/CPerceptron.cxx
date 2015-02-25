@@ -2,6 +2,7 @@
 #include <cassert>
 #include <random>
 #include <iostream>
+#include <queue>
 
 CNN::CPerceptron::CPerceptron(int HiddenLayers)
 {
@@ -93,6 +94,55 @@ void CNN::CPerceptron::FillLayers(std::vector<int> NeuronsQuantity)
 		for (int ii = 0; ii < NeuronsQuantity[i]; ii++)
 			AddNeuronToLayer(GenerateNewNeuron(), i);
 };
+
+void CNN::CPerceptron::MapToArray(double *&map, int &length)
+{
+    length = 0;
+    for (int i = 0; i < this->GetLayerCount(); i++)
+    {
+        TNeuronLayer layer = this->GetLayer(i);
+        for (int i = 0; i < layer.size(); i++)
+            length += layer[i]->DendritsQuantity();
+    }
+    
+    if (!map)
+        map = new double[length];
+    int k = 0;
+    
+    TNeuronLayer layer = this->GetLayer(0);
+    
+    for (int i = 1; i < this->GetLayerCount(); i++)
+    {
+        TNeuronLayer nextLayer = this->GetLayer(i);
+        for (int i = 0; i < nextLayer.size(); i++)
+        {
+            for (int j = 0; j < layer.size(); j++)
+            {
+                map[k++] = nextLayer[i]->GetDendritWeight(layer[j]);
+            }
+        }
+        layer = nextLayer;
+    }
+}
+
+void CNN::CPerceptron::MapFromArray(double *map, int length)
+{
+    int k = 0;
+    TNeuronLayer layer = this->GetLayer(0);
+    
+    for (int i = 1; i < this->GetLayerCount(); i++)
+    {
+        TNeuronLayer nextLayer = this->GetLayer(i);
+        for (int i = 0; i < nextLayer.size(); i++)
+        {
+            for (int j = 0; j < layer.size(); j++)
+            {
+                nextLayer[i]->SetDendritWeight(layer[j], map[k++]);
+            }
+        }
+        layer = nextLayer;
+    }
+}
 
 CNN::CNeuron* CNN::CPerceptron::GenerateNewNeuron()
 {

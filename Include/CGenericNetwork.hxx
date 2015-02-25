@@ -41,6 +41,9 @@ namespace CNN
 		 * @return Output vector.
 		 */
 		virtual TOutputVector Calculate(TInputVector Input) = 0;
+        
+        virtual void MapToArray(double *&map, int &length) = 0;
+        virtual void MapFromArray(double *map, int length) = 0;
 	};
 };
 
